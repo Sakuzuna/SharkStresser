@@ -1,0 +1,10 @@
+socks4://proxy:port
+socks4://proxy:port
+socks4://proxy:port
+socks4://proxy:port
+socks4://proxy:port
+socks4://proxy:port
+socks4://proxy:port
+socks4://proxy:port
+socks4://proxy:port
+socks4://proxy:port
