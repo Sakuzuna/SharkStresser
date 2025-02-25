@@ -1,5 +1,5 @@
 import argparse
-import pystyle
+from pystyle import Colorate, Colors
 from utils.proxy_utils import load_proxies
 from workers.http_flood_attack import http_flood_attack
 from workers.http_bypass_attack import http_bypass_attack
