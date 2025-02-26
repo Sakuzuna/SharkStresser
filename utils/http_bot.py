@@ -1,22 +1,6 @@
 import random
 import requests
-from pystyle import Colorate, Colors
 from socks import socksocket, PROXY_TYPE_SOCKS4, PROXY_TYPE_SOCKS5
-
-COLOR_CODE = {
-    "RESET": "\033[0m",  
-    "UNDERLINE": "\033[04m",
-    "GREEN": "\033[32m",     
-    "YELLOW": "\033[93m",    
-    "RED": "\033[31m",       
-    "CYAN": "\033[36m",     
-    "BOLD": "\033[01m",        
-    "PINK": "\033[95m",
-    "URL_L": "\033[36m",       
-    "LI_G": "\033[92m",      
-    "F_CL": "\033[0m",
-    "DARK": "\033[90m",     
-}
 
 class HTTPBot:
     def __init__(self, proxies, user_agents):
@@ -47,11 +31,8 @@ class HTTPBot:
                 response = session.get(url, timeout=5)
 
             if response.status_code < 500:
-                sentsuccess = f"🦈 Shark successfully attacked the fish: {url} frоm: {proxy['host']}:{proxy['port']} Nom-Nom!"
-                print(Colorate.Horizontal(Colors.blue_to_white, (sentsuccess)))
+                print(f"✅ Request to {url} via {proxy['host']}:{proxy['port']} succeeded")
             else:
-                sentfalse = f"🐟 Oh No! The fish: {url} escaped from: {proxy['host']}:{proxy['port']} Get better proxies!"
-                print(Colorate.Horizontal(Colors.blue_to_white, (sentfalse)))
+                print(f"❌ Request to {url} via {proxy['host']}:{proxy['port']} failed")
         except Exception as e:
-            sentfalse = f"🐟 Oh No! The fish: {url} escaped from: {proxy['host']}:{proxy['port']} Get better proxies!"
-            print(Colorate.Horizontal(Colors.blue_to_white, (sentfalse)))
+            print(f"❌ Request to {url} via {proxy['host']}:{proxy['port']} failed")
