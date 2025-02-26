@@ -1,4 +1,3 @@
 pystyle
-pysyle
 requests
 aiohttp
