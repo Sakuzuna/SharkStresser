@@ -1,6 +1,6 @@
 import socket
 import time
-import pystyle
+from pystyle import Colorate, Colors
 from utils.client_utils import TcpClient
 from utils.random_utils import random_string
 
