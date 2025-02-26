@@ -27,6 +27,7 @@ def load_user_agents(file_path):
 
 def main():
     print(Colorate.Horizontal(Colors.blue_to_white, (sharkprint)))
+    print("Example use: python main.py http://example.com --attack http_flood --duration 60 --packet-size 128")
     parser = argparse.ArgumentParser(description="Network Stress Tool")
     parser.add_argument("target", help="Target URL or IP:Port")
     parser.add_argument("--attack", choices=["http_flood", "http_bypass", "tcp_flood"], required=True, help="Type of attack")
