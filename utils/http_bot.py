@@ -1,6 +1,6 @@
-import aiohttp
-import asyncio
+import aiohttp  
 import random
+import asyncio
 from pystyle import Colorate, Colors
 
 COLOR_CODE = {
