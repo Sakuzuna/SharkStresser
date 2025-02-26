@@ -1,5 +1,4 @@
 import argparse
-import asyncio
 from pystyle import Colorate, Colors
 from banner import sharkprint
 from utils.proxy_utils import load_proxies
@@ -24,7 +23,7 @@ def load_user_agents(file_path):
     with open(file_path, "r") as file:
         return file.read().splitlines()
 
-async def main():
+def main():
     print(Colorate.Horizontal(Colors.blue_to_white, (sharkprint)))
     parser = argparse.ArgumentParser(description="Network Stress Tool")
     parser.add_argument("target", help="Target URL or IP:Port")
@@ -38,7 +37,7 @@ async def main():
     user_agents = load_user_agents("data/uas.txt")
 
     if args.attack == "http_flood":
-        await http_flood_attack(args.target, proxies, user_agents, args.duration, args.packet_size, args.packet_delay)
+        http_flood_attack(args.target, proxies, user_agents, args.duration, args.packet_size, args.packet_delay)
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    main()
