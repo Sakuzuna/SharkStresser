@@ -1,6 +1,6 @@
 import time
 from utils.http_bot import HTTPBot
-from utils.random_utils import random_item, random_string
+from utils.random_utils import random_item, random_boolean, random_string
 
 def start_flood_attack(target, proxies, user_agents, duration, packet_size):
     bots = [HTTPBot(proxy, random_item(user_agents)) for proxy in proxies]
