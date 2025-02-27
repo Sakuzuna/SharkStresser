@@ -1,12 +1,11 @@
 import random
-import time
-from utils.client_utils import HttpClient
+import requests
+from socks import socksocket, PROXY_TYPE_SOCKS4, PROXY_TYPE_SOCKS5
 
 class HTTPBot:
     def __init__(self, proxies, user_agents):
         self.proxies = proxies
         self.user_agents = user_agents
-        self.visited_urls = set()
 
     def get_random_proxy(self):
         return random.choice(self.proxies)
@@ -17,13 +16,23 @@ class HTTPBot:
     def send_request(self, url, payload=None):
         proxy = self.get_random_proxy()
         user_agent = self.get_random_user_agent()
-        session = HttpClient.create_session(proxy, user_agent)
 
         try:
+            session = requests.Session()
+            session.proxies = {
+                "http": f"{proxy['protocol']}://{proxy['host']}:{proxy['port']}",
+                "https": f"{proxy['protocol']}://{proxy['host']}:{proxy['port']}",
+            }
+            session.headers.update({"User-Agent": user_agent})
+
             if payload:
                 response = session.post(url, data=payload, timeout=5)
             else:
                 response = session.get(url, timeout=5)
-            print(f"✅ Request to {url} via {proxy['host']}:{proxy['port']} succeeded")
+
+            if response.status_code < 500:
+                print(f"✅ Request to {url} via {proxy['host']}:{proxy['port']} succeeded")
+            else:
+                print(f"❌ Request to {url} via {proxy['host']}:{proxy['port']} failed: HTTP {response.status_code}")
         except Exception as e:
-            print(f"❌ Request to {url} via {proxy['host']}:{proxy['port']} failed")
+            print(f"❌ Request to {url} via {proxy['host']}:{proxy['port']} failed: {e}")
