@@ -7,19 +7,21 @@ def load_proxies(file_path):
         for line in f:
             line = line.strip()
             if line:
+                print(f"Processing proxy: {line}")  
                 parsed = urlparse(line)
                 proxy = {
                     "protocol": parsed.scheme,
                     "host": parsed.hostname,
                     "port": parsed.port,
                 }
-                if validate_proxy(proxy):  
+                print(f"Parsed proxy: {proxy}")
+                if validate_proxy(proxy): 
+                    print(f"Valid proxy: {proxy}")  
                     proxies.append(proxy)
+                else:
+                    print(f"Invalid proxy: {proxy}")  
         return proxies
 
 def load_user_agents(file_path):
-    """
-    Load user agents from a file.
-    """
     with open(file_path, "r") as f:
         return [line.strip() for line in f if line.strip()]
