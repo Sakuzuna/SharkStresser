@@ -24,7 +24,7 @@ def start_flood_attack(target, proxies, user_agents, duration, packet_size):
             except Exception as e:
                 print(f"❌ Request failed: {e}")
                 failed_requests += 1
-            time.sleep(0.1)
+            time.sleep(0)
 
     print(f"🎉 Attack finished! Total requests sent: {total_requests}")
     print(f"❌ Failed requests: {failed_requests}")
