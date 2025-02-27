@@ -14,4 +14,5 @@ def create_http_client(proxy, headers=None):
         "http": f"{proxy['protocol']}://{proxy['host']}:{proxy['port']}",
         "https": f"{proxy['protocol']}://{proxy['host']}:{proxy['port']}",
     }
-    return requests.Session(), proxies
+    session = requests.Session()
+    return session, proxies
