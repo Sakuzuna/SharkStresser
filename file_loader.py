@@ -1,4 +1,4 @@
-from urllib.parse import urlparse
+from utils.client_utils import validate_proxy
 
 def load_proxies(file_path):
     with open(file_path, "r") as f:
@@ -7,11 +7,13 @@ def load_proxies(file_path):
             line = line.strip()
             if line:
                 parsed = urlparse(line)
-                proxies.append({
+                proxy = {
                     "protocol": parsed.scheme,
                     "host": parsed.hostname,
                     "port": parsed.port,
-                })
+                }
+                if validate_proxy(proxy):  
+                    proxies.append(proxy)
         return proxies
 
 def load_user_agents(file_path):
